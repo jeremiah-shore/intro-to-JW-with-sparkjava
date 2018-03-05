@@ -3,6 +3,8 @@ package net.jeremiahshore.treehouse.model;
 import com.github.slugify.Slugify;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Jeremiah Shore at 3/5/2018 10:36 AM for course-ideas-rebuild.
@@ -11,8 +13,10 @@ public class CourseIdea {
     private String slug;
     private String title;
     private String creator;
+    private Set<String> voters;
 
     public CourseIdea(String title, String creator) {
+        this.voters = new HashSet<>();
         this.title = title;
         this.creator = creator;
         try {
@@ -33,6 +37,14 @@ public class CourseIdea {
 
     public String getCreator() {
         return creator;
+    }
+
+    public boolean addVoter(String voterUserName) {
+        return voters.add(voterUserName);
+    }
+
+    public int getVoteCount() {
+        return voters.size();
     }
 
     @Override
