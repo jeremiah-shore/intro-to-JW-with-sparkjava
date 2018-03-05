@@ -5,6 +5,6 @@ package net.jeremiahshore.treehouse;
  **/
 public class Main {
     public static void main(String[] args) {
-        
+
     }
 }
