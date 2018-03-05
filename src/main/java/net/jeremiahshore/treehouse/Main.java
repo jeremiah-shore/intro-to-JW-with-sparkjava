@@ -76,7 +76,7 @@ public class Main {
         get("/ideas/:slug/", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             CourseIdea courseIdea = dao.findBySlug(request.params("slug"));
-            model.put("idea", courseIdea.getTitle());
+            model.put("idea", courseIdea);
             return new ModelAndView(model, "details.hbs");
         }, new HandlebarsTemplateEngine());
     }
