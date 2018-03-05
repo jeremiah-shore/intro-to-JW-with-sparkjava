@@ -6,6 +6,10 @@
             <li>{{ this }}</li>
         {{/each}}
     </ul>
+
+    <form action="/ideas/{{idea.slug}}/vote" method="post">
+        <button>vote</button>
+    </form>
 {{/partial}}
 
 {{> base.hbs}}

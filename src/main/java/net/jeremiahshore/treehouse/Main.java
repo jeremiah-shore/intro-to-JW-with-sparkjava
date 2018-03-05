@@ -73,7 +73,7 @@ public class Main {
             return null;
         });
 
-        get("/ideas/:slug/", (request, response) -> {
+        get("/ideas/:slug", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             CourseIdea courseIdea = dao.findBySlug(request.params("slug"));
             model.put("idea", courseIdea);
