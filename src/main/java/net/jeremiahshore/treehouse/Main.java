@@ -1,5 +1,7 @@
 package net.jeremiahshore.treehouse;
 
+import net.jeremiahshore.treehouse.model.CourseIdeaDAO;
+import net.jeremiahshore.treehouse.model.SimpleCourseIdeaDAO;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -14,6 +16,8 @@ import static spark.Spark.post;
  **/
 public class Main {
     public static void main(String[] args) {
+        CourseIdeaDAO dao = new SimpleCourseIdeaDAO();
+
         get("/hello", (request, response) -> "Hello World!");
 
         get("/", (request, response) -> {
