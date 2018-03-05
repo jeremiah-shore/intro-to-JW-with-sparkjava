@@ -65,5 +65,12 @@ public class Main {
             response.redirect("/ideas");
             return null;
         }, new HandlebarsTemplateEngine());
+
+        post("/ideas/:slug/vote", (request, response) -> {
+            CourseIdea idea = dao.findBySlug(request.params("slug"));
+            idea.addVoter(request.attribute("username"));
+            response.redirect("/ideas");
+            return null;
+        });
     }
 }
