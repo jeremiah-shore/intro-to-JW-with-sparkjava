@@ -72,5 +72,14 @@ public class Main {
             response.redirect("/ideas");
             return null;
         });
+
+        get("/ideas/:slug/", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            CourseIdea courseIdea = dao.findBySlug(request.params("slug"));
+            model.put("title", courseIdea.getTitle());
+            model.put("voters", courseIdea.getVoters());
+
+            return new ModelAndView(model, "details.hbs");
+        }, new HandlebarsTemplateEngine());
     }
 }

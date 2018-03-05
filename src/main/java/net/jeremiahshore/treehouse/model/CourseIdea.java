@@ -47,6 +47,10 @@ public class CourseIdea {
         return voters.size();
     }
 
+    public Set<String> getVoters() {
+        return new HashSet<>(voters);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
