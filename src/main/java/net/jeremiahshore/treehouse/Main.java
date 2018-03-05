@@ -1,11 +1,13 @@
 package net.jeremiahshore.treehouse;
 
+import net.jeremiahshore.treehouse.model.CourseIdea;
 import net.jeremiahshore.treehouse.model.CourseIdeaDAO;
 import net.jeremiahshore.treehouse.model.SimpleCourseIdeaDAO;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static  spark.Spark.get;
@@ -26,7 +28,7 @@ public class Main {
             Map<String, String> model = new HashMap<>();
             model.put("username", request.cookie("username"));
             return new ModelAndView(model, "index.hbs");
-            }, new HandlebarsTemplateEngine());
+        }, new HandlebarsTemplateEngine());
 
         post("/sign-in", (request, response) -> {
             Map<String, String> model = new HashMap<>();
@@ -34,6 +36,21 @@ public class Main {
             response.cookie("username", username);
             model.put("username", username);
             return new ModelAndView(model, "sign-in.hbs");
-            }, new HandlebarsTemplateEngine());
+        }, new HandlebarsTemplateEngine());
+
+        get("/ideas", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("ideas", dao.findAll());
+            return new ModelAndView(model, "ideas.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/ideas", (request, response) -> {
+            String title = request.queryParams("title");
+            //TODO: this username is tied to the cookie implementation
+            CourseIdea courseIdea = new CourseIdea(title, request.cookie("username"));
+            dao.add(courseIdea);
+            response.redirect("/ideas");
+            return null;
+        }, new HandlebarsTemplateEngine());
     }
 }
