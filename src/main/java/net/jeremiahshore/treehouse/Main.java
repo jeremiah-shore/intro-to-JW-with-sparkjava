@@ -60,7 +60,6 @@ public class Main {
 
         post("/ideas", (request, response) -> {
             String title = request.queryParams("title");
-            //TODO: this username is tied to the cookie implementation
             CourseIdea courseIdea = new CourseIdea(title, request.attribute("username"));
             dao.add(courseIdea);
             response.redirect("/ideas");
