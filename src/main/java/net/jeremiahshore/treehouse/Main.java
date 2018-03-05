@@ -37,7 +37,7 @@ public class Main {
             model.put("username", username);
             response.redirect("/");
             return null;
-        }, new HandlebarsTemplateEngine());
+        });
 
         get("/ideas", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
