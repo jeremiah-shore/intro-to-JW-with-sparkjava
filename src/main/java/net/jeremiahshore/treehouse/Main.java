@@ -10,9 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static  spark.Spark.get;
-import static spark.Spark.post;
-import static spark.Spark.staticFileLocation;
+import static spark.Spark.*;
 
 /**
  * Created by Jeremiah Shore at 3/4/2018 10:13 PM for course-ideas-rebuild.
@@ -21,6 +19,14 @@ public class Main {
     public static void main(String[] args) {
         staticFileLocation("/public");
         CourseIdeaDAO dao = new SimpleCourseIdeaDAO();
+
+        before("/ideas", (request, response) -> {
+            //TODO: send user a message about redirection
+            if(request.cookie("username") == null) {
+                response.redirect("/");
+                halt();
+            }
+        });
 
         get("/hello", (request, response) -> "Hello World!");
 
