@@ -78,7 +78,6 @@ public class Main {
             CourseIdea courseIdea = dao.findBySlug(request.params("slug"));
             model.put("title", courseIdea.getTitle());
             model.put("voters", courseIdea.getVoters());
-
             return new ModelAndView(model, "details.hbs");
         }, new HandlebarsTemplateEngine());
     }
